@@ -24,7 +24,7 @@
 #
 # - AUTHOR: full name of the module's author/Copyright owner.
 #
-# - AUTHOR_EMAIL: email contact for the module
+# - EMAIL: email contact for the module
 #
 # - DESCRIPTION: one-line description of the module.
 #
@@ -48,8 +48,8 @@ endif
 ifeq ($(AUTHOR),)
 $(error no AUTHOR specified)
 endif
-ifeq ($(AUTHOR_EMAIL),)
-$(error no AUTHOR_EMAIL specified)
+ifeq ($(EMAIL),)
+$(error no EMAIL specified)
 endif
 ifeq ($(DESCRIPTION),)
 $(error no DESCRIPTION specified)
@@ -109,7 +109,7 @@ template-init:
 	$(call TEMPLATE_VERIFY, $(TEMPLATE_FILES), $(TEMPLATE_DIRS))
 	$(call TEMPLATE_REPLACE_A,my_module,$(MODULE))
 	$(call TEMPLATE_REPLACE,AUTHOR)
-	$(call TEMPLATE_REPLACE,AUTHOR_EMAIL)
+	$(call TEMPLATE_REPLACE,EMAIL)
 	$(call TEMPLATE_REPLACE,DESCRIPTION)
 	$(call TEMPLATE_REPLACE,YEAR)
 	# $(call TEMPLATE_REPLACE,URL)
@@ -118,7 +118,8 @@ template-init:
 	mv my_module $(MODULE)
 	rm README.template.md
 	rm template-init.mk
-	sed -i 's/include template-init.mk//' Makefile
+	sed -ir 's/^include template-init.mk$$//' Makefile
+	sed -ir 's/^# //' Makefile
 	@echo The repository has been initialized for module $(MODULE). Now you can:
 	@echo - Inspect the results, and commit changes with: \`git add -A && git commit -m \"Initial commit\"\`
 	@echo - Revert all changes and start again with: \`git reset --hard\`
