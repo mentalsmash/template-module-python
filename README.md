@@ -1,2 +1,3 @@
-# template-module-python
-A template repository for simple Python modules
+# my_module - SETUP_DESCRIPTION
+
+A simple Python module.
