@@ -1,1 +1,3 @@
-termcolor
+# You can automatically generate this file from your local pip installation
+# with `python3 -m pip freeze > requirements.txt`
+# (or using target `venv.freeze` from the bundled Makefile)
