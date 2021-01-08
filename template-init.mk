@@ -78,21 +78,6 @@ TEMPLATE_FILES := Makefile \
 TEMPLATE_DIRS := .git \
                   my_module
 
-define TEMPLATE_VERIFY
-for f in $(1); do \
-	if [ ! -f "$${f}" ]; then \
-		echo "-- Required file not found: $${f}" >&2; \
-		[ -n "$(TEMPLATE_DEV)" ] || exit 1; \
-	fi; \
-done; \
-for d in $(2); do \
-	if [ ! -d "$${d}" ]; then \
-		echo "-- Required directory not found: $${d}" >&2; \
-		[ -n "$(TEMPLATE_DEV)" ] || exit 1; \
-	fi; \
-done
-endef
-
 define TEMPLATE_ESCAPE
 $(shell printf '%s' '$(1)' | sed 's/\//\\\//g')
 endef
@@ -105,11 +90,27 @@ define TEMPLATE_REPLACE
 $(call TEMPLATE_REPLACE_A,SETUP_$(1),$($(1)))
 endef
 
+define TEMPLATE_VERIFY
+$(shell for f in $(1); do \
+	if [ ! -f "$${f}" ]; then \
+		echo "-- Required file not found: $${f}" >&2; \
+		[ -n "$(TEMPLATE_DEV)" ] || exit 1; \
+	fi; \
+done; \
+for d in $(2); do \
+	if [ ! -d "$${d}" ]; then \
+		echo "-- Required directory not found: $${d}" >&2; \
+		[ -n "$(TEMPLATE_DEV)" ] || exit 1; \
+	fi; \
+done)
+endef
+
+$(call TEMPLATE_VERIFY, $(TEMPLATE_FILES), $(TEMPLATE_DIRS))
+
 ################################################################################
 # Template initialization target
 ################################################################################
 template-init:
-	$(call TEMPLATE_VERIFY, $(TEMPLATE_FILES), $(TEMPLATE_DIRS))
 	$(call TEMPLATE_REPLACE_A,my_module,$(MODULE))
 	$(call TEMPLATE_REPLACE,AUTHOR)
 	$(call TEMPLATE_REPLACE,EMAIL)
@@ -124,7 +125,9 @@ template-init:
 	sed -i 's/^include template-init.mk$$//' Makefile
 	sed -i -r 's/^# (MODULE|include)/\1/' Makefile
 	git add -A
+	@echo -e '\n---------------------------------------------------------------------------\n\n'
 	@echo "The repository has been initialized for module \'$(MODULE)\'. Now you can:"
 	@echo -e '- Inspect the results:\n\tgit diff'
 	@echo -e '- Commit changes:\n\tgit commit -m "Customized from mentalsmash/template-python-module"'
 	@echo -e '- Revert all changes:\n\tgit reset --hard && rm -rf "$(MODULE)"'
+	@echo -e '\n---------------------------------------------------------------------------\n'
