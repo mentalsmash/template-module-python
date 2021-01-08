@@ -93,13 +93,16 @@ for d in $(2); do \
 done
 endef
 
+define TEMPLATE_ESCAPE
+$(shell printf '%s' '$(1)' | sed 's/\//\\\//g')
+endef
 
 define TEMPLATE_REPLACE_A
-find . ! -path "*.git*" -type f -exec sed -i 's/$(1)/$(2)/g' {} \;
+find . ! -path "*.git*" -type f -exec sed -i 's/$(1)/$(call TEMPLATE_ESCAPE,$(2))/g' {} \;
 endef
 
 define TEMPLATE_REPLACE
-$(call TEMPLATE_REPLACE_A,$(1),$($(1)))
+$(call TEMPLATE_REPLACE_A,SETUP_$(1),$($(1)))
 endef
 
 ################################################################################
@@ -112,7 +115,7 @@ template-init:
 	$(call TEMPLATE_REPLACE,EMAIL)
 	$(call TEMPLATE_REPLACE,DESCRIPTION)
 	$(call TEMPLATE_REPLACE,YEAR)
-	# $(call TEMPLATE_REPLACE,URL)
+	$(call TEMPLATE_REPLACE,URL)
 	$(call TEMPLATE_REPLACE,VERSION)
 	$(call TEMPLATE_REPLACE,PY_MIN)
 	mv my_module $(MODULE)
