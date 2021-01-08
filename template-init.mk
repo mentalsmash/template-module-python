@@ -107,10 +107,24 @@ endef
 
 $(call TEMPLATE_VERIFY, $(TEMPLATE_FILES), $(TEMPLATE_DIRS))
 
+define LINE
+echo -e '\n---------------------------------------------------------------------------\n'
+endef
+
 ################################################################################
 # Template initialization target
 ################################################################################
 template-init:
+	@$(call LINE)
+	@echo -e 'Customizing repository with the following configuration:'
+	@echo -e '  - MODULE: "$(MODULE)"'
+	@echo -e '  - AUTHOR: "$(AUTHOR)"'
+	@echo -e '  - EMAIL: "$(EMAIL)"'
+	@echo -e '  - YEAR: "$(YEAR)"'
+	@echo -e '  - VERSION: "$(VERSION)"'
+	@echo -e '  - URL: "$(URL)"'
+	@echo -e '  - PY_MIN: "$(PY_MIN)"'
+	@$(call LINE)
 	$(call TEMPLATE_REPLACE_A,my_module,$(MODULE))
 	$(call TEMPLATE_REPLACE,AUTHOR)
 	$(call TEMPLATE_REPLACE,EMAIL)
@@ -125,9 +139,9 @@ template-init:
 	sed -i 's/^include template-init.mk$$//' Makefile
 	sed -i -r 's/^# (MODULE|include)/\1/' Makefile
 	git add -A
-	@echo -e '\n---------------------------------------------------------------------------\n\n'
+	@$(call LINE)
 	@echo "The repository has been initialized for module \'$(MODULE)\'. Now you can:"
 	@echo -e '- Inspect the results:\n\tgit diff'
 	@echo -e '- Commit changes:\n\tgit commit -m "Customized from mentalsmash/template-python-module"'
 	@echo -e '- Revert all changes:\n\tgit reset --hard && rm -rf "$(MODULE)"'
-	@echo -e '\n---------------------------------------------------------------------------\n'
+	@$(call LINE)
