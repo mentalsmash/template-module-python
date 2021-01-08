@@ -11,6 +11,7 @@ Change the value of each variable to suit your configuration.
 ```sh
 make template-init MODULE=my_module \
                    AUTHOR="John Doe" \
+                   EMAILE="john@doe.com" \
                    DESCRIPTION="A simple Python module"
 ```
 
