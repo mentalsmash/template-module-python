@@ -19,7 +19,7 @@ include template-init.mk
 ###############################################################################
 # Makefile begins here
 ###############################################################################
-MODULE := my_package
+MODULE := my_module
 DIST_DIR := dist
 BUILD_DIR := build
 EGG_DIR := $(MODULE).egg-info

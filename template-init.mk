@@ -107,7 +107,7 @@ endef
 ################################################################################
 template-init:
 	$(call TEMPLATE_VERIFY, $(TEMPLATE_FILES), $(TEMPLATE_DIRS))
-	$(call TEMPLATE_REPLACE_A,my_package,$(MODULE))
+	$(call TEMPLATE_REPLACE_A,my_module,$(MODULE))
 	$(call TEMPLATE_REPLACE,AUTHOR)
 	$(call TEMPLATE_REPLACE,AUTHOR_EMAIL)
 	$(call TEMPLATE_REPLACE,DESCRIPTION)
@@ -115,7 +115,7 @@ template-init:
 	# $(call TEMPLATE_REPLACE,URL)
 	$(call TEMPLATE_REPLACE,VERSION)
 	$(call TEMPLATE_REPLACE,PY_MIN)
-	mv my_package $(MODULE)
+	mv my_module $(MODULE)
 	rm README.template.md
 	rm template-init.mk
 	sed -i 's/include template-init.mk//' Makefile

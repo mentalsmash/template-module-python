@@ -19,7 +19,7 @@ with open("README.md", "r") as readme_f:
     readme_contents = readme_f.read()
 
 setuptools.setup(
-    name="my_package",
+    name="my_module",
     version="SETUP_VERSION",
     author="SETUP_AUTHOR",
     author_email="SETUP_AUTHOR_EMAIL",
