@@ -125,5 +125,6 @@ template-init:
 	sed -i -r 's/^# (MODULE|include)/\1/' Makefile
 	git add -A
 	@echo "The repository has been initialized for module \'$(MODULE)\'. Now you can:"
-	@echo -e '- Inspect the results, and commit changes with:\n\git commit'
-	@echo -e '- Revert all changes and start again with:\n\tgit reset --hard && rm -rf "$(MODULE)"'
+	@echo -e '- Inspect the results:\n\tgit diff'
+	@echo -e '- Commit changes:\n\tgit commit -m "Customized from mentalsmash/template-python-module"'
+	@echo -e '- Revert all changes:\n\tgit reset --hard && rm -rf "$(MODULE)"'
