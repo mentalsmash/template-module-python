@@ -22,7 +22,7 @@ setuptools.setup(
     name="my_module",
     version="SETUP_VERSION",
     author="SETUP_AUTHOR",
-    author_email="SETUP_AUTHOR_EMAIL",
+    author_email="SETUP_EMAIL",
     description="SETUP_DESCRIPTION",
     license="License :: OSI Approved :: Apache Software License",
     long_description=readme_contents,
