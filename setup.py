@@ -34,7 +34,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache Software License",
     ],
-    python_requires='>=3.6, <4',
+    python_requires='>=SETUP_PY_MIN, <4',
     install_requires=[
         # Add your pip dependencies here
         # (regenerate requirements.txt with `make venv.freeze`)

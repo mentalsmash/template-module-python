@@ -37,6 +37,8 @@
 #
 # - URL: Homepage for the module. Default: URL of git's `origin` remote.
 #
+# - PY_MIN: Minimum version of Python 3 supported by the module. Default: 3.6
+#
 ################################################################################
 # Check that all required variables have been specified
 ################################################################################
@@ -58,6 +60,7 @@ endif
 YEAR ?= $(shell date +%Y)
 VERSION ?= 0.1.0
 URL ?= $(shell git remote get-url origin)
+PY_MIN ?= 3.6
 ################################################################################
 # Files to check to verify the template's integrity
 ################################################################################
@@ -111,6 +114,7 @@ template-init:
 	$(call TEMPLATE_REPLACE,YEAR)
 	$(call TEMPLATE_REPLACE,URL)
 	$(call TEMPLATE_REPLACE,VERSION)
+	$(call TEMPLATE_REPLACE,PY_MIN)
 	mv my_package $(MODULE)
 	rm README.template.md
 	rm template-init.mk
