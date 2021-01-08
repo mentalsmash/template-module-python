@@ -121,8 +121,8 @@ template-init:
 	mv my_module $(MODULE)
 	rm README.template.md
 	rm template-init.mk
-	sed -ir 's/^include template-init.mk$$//' Makefile
-	sed -ir 's/^# //' Makefile
+	sed -i 's/^include template-init.mk$$//' Makefile
+	sed -i 's/^# //' Makefile
 	@echo "The repository has been initialized for module \'$(MODULE)\'. Now you can:"
 	@echo -e '- Inspect the results, and commit changes with:\n\tgit add -A && git commit'
 	@echo -e '- Revert all changes and start again with:\n\tgit reset --hard'
