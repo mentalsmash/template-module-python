@@ -141,7 +141,7 @@ template-init:
 	git add -A
 	@$(call LINE)
 	@echo "The repository has been initialized for module \'$(MODULE)\'. Now you can:"
-	@echo -e '- Inspect the results:\n\tgit diff HEAD~1'
+	@echo -e '- Inspect changes:\n\tgit diff HEAD~1'
 	@echo -e '- Commit changes:\n\tgit commit -m "Customized from mentalsmash/template-python-module"'
-	@echo -e '- Revert all changes:\n\tgit reset --hard && rm -rf "$(MODULE)"'
+	@echo -e '- Revert changes:\n\tgit reset --hard && rm -rf "$(MODULE)"'
 	@$(call LINE)
