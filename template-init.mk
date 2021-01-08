@@ -123,6 +123,7 @@ template-init:
 	rm template-init.mk
 	sed -i 's/^include template-init.mk$$//' Makefile
 	sed -i -r 's/^# (MODULE|include)/\1/' Makefile
+	git add -A
 	@echo "The repository has been initialized for module \'$(MODULE)\'. Now you can:"
-	@echo -e '- Inspect the results, and commit changes with:\n\tgit add -A && git commit'
-	@echo -e '- Revert all changes and start again with:\n\tgit reset --hard'
+	@echo -e '- Inspect the results, and commit changes with:\n\git commit'
+	@echo -e '- Revert all changes and start again with:\n\tgit reset --hard && rm -rf "$(MODULE)"'
