@@ -95,7 +95,7 @@ endef
 
 
 define TEMPLATE_REPLACE_A
-find . -type f ! -name '.*' -exec sed -i 's/$(1)/$(2)/g' {} \;
+find . ! -path "*.git*" -type f -exec sed -i 's/$(1)/$(2)/g' {} \;
 endef
 
 define TEMPLATE_REPLACE
